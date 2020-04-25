@@ -10,3 +10,6 @@ font-family: "Lobster", cursive;
 color: white;
 background-color: rgba(0, 0, 0, 0.5);
 }
+
+.spacer
+{padding-bottom: 10px;}
