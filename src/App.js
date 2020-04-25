@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import Directory from './components/DirectoryComponent';
+import CampsiteInfo from './components/CampsiteInfoComponent';
 import './App.css';
 import { CAMPSITES } from './shared/campsites';
 
@@ -15,7 +16,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Navbar dark color="primary">
-                    <div className="contain.er">
+                    <div className="container">
                         <NavbarBrand href="/">NuCamp</NavbarBrand>
                     </div>
                 </Navbar>
