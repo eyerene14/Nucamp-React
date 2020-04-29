@@ -1,18 +1,59 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Directory from './DirectoryComponent';
 import { Container, Row, Col, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class CampsiteInfo extends Component {
-
-
-    campsiteNotNull(campsite) {
-        if (campsite) {
-            return (
-                <div><Row></Row></div>
-            );
-        }
-        return <div />;
+function RenderCampsite({ campsite }) {
+    if (campsite) {
+        return (
+            <div className="col-md-5 m-1">
+                <Card>
+                    <CardImg top src={campsite.image} alt={campsite.name} />
+                    <CardBody>
+                        <CardTitle>{campsite.name}</CardTitle>
+                        <CardText>{campsite.description}</CardText>
+                    </CardBody>
+                </Card>
+            </div>
+        );
     }
+    return <div />;
+}
+
+function RenderComments({ c }) {
+        return (<div className="col-md-5 m-1">
+            <h4>Comments</h4>
+            {c.comments.map(comment => {
+                return (
+                    <Row className="spacer">
+                        {comment.text}
+                        <br></br>
+                        --{comment.author},
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}
+                        <br></br>
+                    </Row>
+                )
+            })}
+        </div>);
+}
+
+function CampsiteInfo(props) {
+    if (props.campsites) {
+        return (
+            <div className="container">
+                <Row md="5">
+                    <RenderCampsite campsite={props.campsites} />
+                    <RenderComments c={props.campsites} />
+                    {/*{this.renderCampsite(this.props.campsites)}
+                {this.renderComments(this.props.campsites)}*/}
+                </Row>
+            </div>
+        );
+    }
+    return <div />;
+}
+
+{/* 
+class CampsiteInfo extends Component {
 
     renderCampsite(campsite) {
         if (campsite) {
@@ -63,6 +104,6 @@ class CampsiteInfo extends Component {
             </div>
         );
     }
-}
+}*/}
 
 export default CampsiteInfo;
