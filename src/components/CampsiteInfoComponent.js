@@ -10,7 +10,6 @@ function RenderCampsite({ campsite }) {
                 <Card>
                     <CardImg top src={campsite.image} alt={campsite.name} />
                     <CardBody>
-                        <CardTitle>{campsite.name}</CardTitle>
                         <CardText>{campsite.description}</CardText>
                     </CardBody>
                 </Card>
@@ -25,7 +24,7 @@ function RenderComments({ comment }) {
         <h4>Comments</h4>
         {comment.map(c => {
             return (
-                <Row className="spacer">
+                <Row className="spacer mb-3">
                     {c.text}
                     <br></br>
                         --{c.author}, {''}
@@ -41,6 +40,16 @@ function CampsiteInfo(props) {
     if (props.campsite) {
         return (
             <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/Directory">Directory</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{props.campsite.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <h2>{props.campsite.name}</h2>
+                        <hr />
+                    </div>
+                </div>
                 <Row md="5">
                     <RenderCampsite campsite={props.campsite} />
                     <RenderComments comment={props.comments} />
