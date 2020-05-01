@@ -19,16 +19,16 @@ function RenderCampsite({ campsite }) {
     return <div />;
 }
 
-function RenderComments({ c }) {
+function RenderComments({ comment }) {
         return (<div className="col-md-5 m-1">
             <h4>Comments</h4>
-            {c.comments.map(comment => {
+            {comment.map(c => {
                 return (
                     <Row className="spacer">
-                        {comment.text}
+                        {c.text}
                         <br></br>
-                        --{comment.author},
-                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)))}
+                        --{c.author}, {''}
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(c.date)))}
                         <br></br>
                     </Row>
                 )
@@ -37,12 +37,12 @@ function RenderComments({ c }) {
 }
 
 function CampsiteInfo(props) {
-    if (props.campsites) {
+    if (props.campsite) {
         return (
             <div className="container">
                 <Row md="5">
-                    <RenderCampsite campsite={props.campsites} />
-                    <RenderComments c={props.campsites} />
+                    <RenderCampsite campsite={props.campsite} />
+                    <RenderComments comment={props.comments} />
                     {/*{this.renderCampsite(this.props.campsites)}
                 {this.renderComments(this.props.campsites)}*/}
                 </Row>
