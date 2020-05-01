@@ -16,7 +16,7 @@ class Main extends Component {
             campsites: CAMPSITES
         };
     }
-    
+
     render() {
 
         const HomePage = () => {
