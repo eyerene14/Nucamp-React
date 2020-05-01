@@ -1,6 +1,7 @@
 import React from 'react';
 import Directory from './DirectoryComponent';
-import { Container, Row, Col, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Container, Row, Col, Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function RenderCampsite({ campsite }) {
     if (campsite) {
@@ -20,20 +21,20 @@ function RenderCampsite({ campsite }) {
 }
 
 function RenderComments({ comment }) {
-        return (<div className="col-md-5 m-1">
-            <h4>Comments</h4>
-            {comment.map(c => {
-                return (
-                    <Row className="spacer">
-                        {c.text}
-                        <br></br>
+    return (<div className="col-md-5 m-1">
+        <h4>Comments</h4>
+        {comment.map(c => {
+            return (
+                <Row className="spacer">
+                    {c.text}
+                    <br></br>
                         --{c.author}, {''}
-                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(c.date)))}
-                        <br></br>
-                    </Row>
-                )
-            })}
-        </div>);
+                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(c.date)))}
+                    <br></br>
+                </Row>
+            )
+        })}
+    </div>);
 }
 
 function CampsiteInfo(props) {
