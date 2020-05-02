@@ -13,8 +13,8 @@ function RenderPartner({ partner }) {
                         <h5>
                             {partner.name}
                         </h5>
-                        {partner.description}
                     </Media>
+                    {partner.description}
                 </Media>
             </React.Fragment>
         )
