@@ -9,6 +9,7 @@ import CampsiteInfo from './CampsiteInfoComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from './HomeComponent';
+import AboutUs from './AboutComponent';
 import Contact from './ContactComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -36,6 +37,14 @@ class Main extends Component {
             );
         }
 
+        const AboutUsPage = () => {
+            return (
+                <AboutUs 
+                    partner={this.state.partners.filter(partner => partner.featured)[0]}
+                />
+            );
+        }
+
         const CampsiteWithId = ({match}) => {
             return (
                 <CampsiteInfo 
@@ -52,6 +61,7 @@ class Main extends Component {
                     <Route path='/home' component={HomePage} />
                     <Route exact path='/directory' render={() => <Directory campsites={this.state.campsites} />} />
                     <Route path='/directory/:campsiteId' component={CampsiteWithId} />
+                    <Route path='/aboutus' render={() => <AboutUs partners={this.state.partners} />} />
                     <Route exact path='/contactus' component={Contact} />
                     <Redirect to='/home' />
                 </Switch>
