@@ -6,10 +6,10 @@ function RenderPartner({ partner }) {
     if (partner) {
         return (
             <React.Fragment>
-                <Media boolean="object" src={partner.image} alt={partner.name} width="150">
+                <Media object src={partner.image} alt={partner.name} width="150">
                 </Media>
-                <Media boolean="body" className="ml-5 mb-4">
-                    <Media boolean="heading">
+                <Media body className="ml-5 mb-4">
+                    <Media heading>
                         <h5>
                             {partner.name}
                         </h5>
