@@ -69,7 +69,7 @@ class CommentForm extends Component {
                             </div>
                             <div className="form-group">
                                 <Label htmlFor="author" md={3}>Your Name</Label>
-                                <Col>
+                                <Col md={10}>
                                     <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
@@ -94,7 +94,7 @@ class CommentForm extends Component {
                             </div>
                             <div className="form-group">
                                 <Label htmlFor="text" md={2}>Comment</Label>
-                                <Col>
+                                <Col md={10}>
                                     <Control.textarea model=".text" id="text" name="text"
                                         rows="6"
                                         className="form-control"
