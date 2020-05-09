@@ -21,7 +21,9 @@ class CommentForm extends Component {
             author: '',
             text: '',
             touched: {
+                rating: false,
                 author: false,
+                text: ''
             }
 
         }
@@ -46,65 +48,71 @@ class CommentForm extends Component {
 
         return (
             <React.Fragment>
-            <div>
-                <span className="navbar-text ml-auto">
-                <Button outline color="white" onClick={this.toggleModal}><i className="fa fa-pencil" />Submit Comment</Button>
-            </span>
-            <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-                    <ModalBody>
-                    <LocalForm onSubmit={values => this.handleSubmit(values)}>
-                            <div className="form-group">
-                                <Label htmlFor="rating" md={2}>Rating</Label>
-                                <Col md={10}>
-                                <Control.select model=".rating" name="rating"
-                                        className="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </Control.select>
-                                </Col>
-                            </div>
-                            <div className="form-group">
-                                <Label htmlFor="author" md={3}>Your Name</Label>
-                                <Col md={10}>
-                                    <Control.text model=".author" id="author" name="author"
-                                        placeholder="Your Name"
-                                        className="form-control"
-                                        validators={{
-                                            required, 
-                                            minLength: minLength(2),
-                                            maxLength: maxLength(15)
-                                        }}
-                                    />
-                                    <Errors
-                                        className="text-danger"
-                                        model=".author"
-                                        show="touched"
-                                        component="div"
-                                        messages={{
-                                            required: 'Required',
-                                            minLength: 'Must be at least 2 characters',
-                                            maxLength: 'Must be 15 characters or less'
-                                        }}
-                                    />
-                                </Col>
-                            </div>
-                            <div className="form-group">
-                                <Label htmlFor="text" md={2}>Comment</Label>
-                                <Col md={10}>
-                                    <Control.textarea model=".text" id="text" name="text"
-                                        rows="6"
-                                        className="form-control"
-                                    />
-                                </Col>
-                            </div>
-                        </LocalForm>
-                    </ModalBody>
-                </Modal>
-            </div>
+                <div>
+                    <span className="navbar-text ml-auto">
+                        <Button outline color="white" onClick={this.toggleModal}><i className="fa fa-pencil" />Submit Comment</Button>
+                    </span>
+                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                        <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+                        <ModalBody>
+                            <LocalForm onSubmit={values => this.handleSubmit(values)}>
+                                <div className="form-group">
+                                    <Label htmlFor="rating" md={2}>Rating</Label>
+                                    <Col>
+                                        <Control.select model=".rating" name="rating"
+                                            className="form-control">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </Control.select>
+                                    </Col>
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="author" md={3}>Your Name</Label>
+                                    <Col>
+                                        <Control.text model=".author" id="author" name="author"
+                                            placeholder="Your Name"
+                                            className="form-control"
+                                            validators={{
+                                                minLength: minLength(2),
+                                                maxLength: maxLength(15)
+                                            }}
+                                        />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".author"
+                                            show="touched"
+                                            component="div"
+                                            messages={{
+                                                required: 'Required',
+                                                minLength: 'Must be at least 2 characters',
+                                                maxLength: 'Must be 15 characters or less'
+                                            }}
+                                        />
+                                    </Col>
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="text" md={2}>Comment</Label>
+                                    <Col>
+                                        <Control.textarea model=".text" id="text" name="text"
+                                            rows="6"
+                                            className="form-control"
+                                        />
+                                    </Col>
+                                </div>
+                                <div className="form-group">
+                                    <Col>
+                                        <Button type="submit" color="primary">
+                                            Submit
+                                    </Button>
+                                    </Col>
+                                </div>
+                            </LocalForm>
+                        </ModalBody>
+                    </Modal>
+                </div>
             </React.Fragment>
         )
     }
