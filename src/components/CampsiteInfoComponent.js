@@ -40,8 +40,8 @@ class CommentForm extends Component {
 
 
     handleSubmit(values) {
-        console.log('Current state is: ' + JSON.stringify(values));
-        alert('Current state is: ' + JSON.stringify(values));
+        this.toggleModal();
+        this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
     }
 
     render() {
@@ -134,10 +134,10 @@ function RenderCampsite({ campsite }) {
     return <div />;
 }
 
-function RenderComments({ comment }) {
+function RenderComments({ comments, addComment, campsiteId }) {
     return (<div className="col-md-5 m-1">
         <h4>Comments</h4>
-        {comment.map(c => {
+        {comments.map(c => {
             return (
                 <Row className="spacer mb-3">
                     {c.text}
@@ -148,7 +148,7 @@ function RenderComments({ comment }) {
                 </Row>
             )
         })}
-        <CommentForm />
+        <CommentForm campsiteId={campsiteId} addComment={addComment} />
     </div>);
 }
 
@@ -168,7 +168,11 @@ function CampsiteInfo(props) {
                 </div>
                 <Row md="5">
                     <RenderCampsite campsite={props.campsite} />
-                    <RenderComments comment={props.comments} />
+                    <RenderComments 
+                        comments={props.comments}
+                        addComment={props.addComment}
+                        campsiteId={props.campsite.id}
+                    />
                     {/*{this.renderCampsite(this.props.campsites)}
                 {this.renderComments(this.props.campsites)}*/}
                 </Row>
