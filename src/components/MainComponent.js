@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
 import Header from './HeaderComponent';
@@ -49,14 +48,6 @@ class Main extends Component {
                     promotion={this.props.promotions.promotions.filter(promotion => promotion.featured)[0]}
                     promotionLoading={this.props.promotions.isLoading}
                     promotionErrMess={this.props.promotions.errMess}
-                />
-            );
-        }
-
-        const AboutUsPage = () => {
-            return (
-                <AboutUs
-                    partner={this.props.partners.filter(partner => partner.featured)[0]}
                 />
             );
         }

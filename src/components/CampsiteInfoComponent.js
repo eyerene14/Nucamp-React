@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Directory from './DirectoryComponent';
 import {
     Row, Col, Card, CardImg, CardText, Label,
     CardBody, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody,
@@ -10,7 +9,6 @@ import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
-const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
 const minLength = len => val => val && (val.length >= len);
 
@@ -214,59 +212,5 @@ function CampsiteInfo(props) {
     }
     return <div />;
 }
-
-{/* 
-class CampsiteInfo extends Component {
-
-    renderCampsite(campsite) {
-        if (campsite) {
-            return (
-                    <div className="col-md-5 m-1">
-                        <Card>
-                            <CardImg top src={campsite.image} alt={campsite.name} />
-                            <CardBody>
-                                <CardTitle>{campsite.name}</CardTitle>
-                                <CardText>{campsite.description}</CardText>
-                            </CardBody>
-                        </Card>
-                    </div>
-            );
-        }
-        return <div />;
-    }
-
-    renderComments(c) {
-        //const array1 = comment.comments;
-        if (c) {
-            return (<div className="col-md-5 m-1">
-                <h4>Comments</h4>
-                {c.comments.map(comment => {
-                    return (
-                        <Row className="spacer">
-                            {comment.text}
-                            <br></br>
-                            --{comment.author},  
-                             {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
-                             <br></br>
-                        </Row>
-                    )
-                })}
-            </div>);
-        }
-        return <div />;
-    }
-
-    render() {
-
-        return (
-            <div className="container">
-                <Row md="5">
-                {this.renderCampsite(this.props.campsites)}
-                {this.renderComments(this.props.campsites)}
-                </Row>
-            </div>
-        );
-    }
-}*/}
 
 export default CampsiteInfo;
