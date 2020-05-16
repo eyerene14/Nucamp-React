@@ -195,17 +195,25 @@ export const addPartners = partners => ({
 });
 
 export const postFeedback = (firstName, lastName, phoneNum, email, agree, contactType, feedback) => dispatch => {
+//export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
     
-    const feedback = {
-        firstName: '',
-        lastName: '',
-        phoneNum: '',
-        email: '',
-        agree: false,
-        contactType: 'Phone',
-        feedback: ''
+    /*const feedback = {
+        campsiteId: campsiteId,
+        rating: rating,
+        author: author,
+        text: text
+    };*/
+
+    const feedbacks = {
+        firstName: firstName,
+        lastName: lastName,
+        phoneNum: phoneNum,
+        email: email,
+        agree: agree,
+        contactType: contactType,
+        feedback: feedback
     };
-    feedback.date = new Date().toISOString();
+    feedbacks.date = new Date().toISOString();
 
     return fetch(baseUrl + 'feedback', {
             method: "POST",
@@ -216,7 +224,7 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
         })
         .then(response => {
                 if (response.ok) {
-                    return alert("Thank you for your feedback" + feedback);
+                    return alert("Thank you for your feedback" + JSON.stringify(feedbacks));
                 } else {
                     const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
@@ -225,8 +233,8 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
             },
             error => { throw error; }
         )
-        .then(response => response.json())
-        .then(response => dispatch(addComment(response)))
+        //.then(response => response.json())
+        //.then(response => dispatch(response))
         .catch(error => {
             console.log('post feedback', error.message);
             alert('Your feedback could not be posted\nError: ' + error.message);
