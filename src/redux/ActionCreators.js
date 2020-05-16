@@ -194,13 +194,16 @@ export const addPartners = partners => ({
     payload: partners
 });
 
-export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
+export const postFeedback = (firstName, lastName, phoneNum, email, agree, contactType, feedback) => dispatch => {
     
     const feedback = {
-        campsiteId: campsiteId,
-        rating: rating,
-        author: author,
-        text: text
+        firstName: '',
+        lastName: '',
+        phoneNum: '',
+        email: '',
+        agree: false,
+        contactType: 'Phone',
+        feedback: ''
     };
     feedback.date = new Date().toISOString();
 
@@ -213,7 +216,7 @@ export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
         })
         .then(response => {
                 if (response.ok) {
-                    return alert("Thank you for your feedback" + response);
+                    return alert("Thank you for your feedback" + feedback);
                 } else {
                     const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
@@ -223,6 +226,7 @@ export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
             error => { throw error; }
         )
         .then(response => response.json())
+        .then(response => dispatch(addComment(response)))
         .catch(error => {
             console.log('post feedback', error.message);
             alert('Your feedback could not be posted\nError: ' + error.message);

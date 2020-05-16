@@ -1,4 +1,5 @@
 import {createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createForms } from 'react-redux-form';
 import { InitialFeedback } from './forms';
 import { Campsites } from './campsites';
@@ -19,7 +20,9 @@ export const ConfigureStore = () => {
                 feedbackForm: InitialFeedback
             })
         }),   
+        composeWithDevTools(
         applyMiddleware(thunk, logger)
+        )
     );
 
     return store;
