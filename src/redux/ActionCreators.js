@@ -194,10 +194,15 @@ export const addPartners = partners => ({
     payload: partners
 });
 
+export const addFeedback = feedback => ({
+    type: ActionTypes.ADD_FEEDBACK,
+    payload: feedback
+});
+
 export const postFeedback = (firstName, lastName, phoneNum, email, agree, contactType, feedback) => dispatch => {
 //export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
     
-    /*const feedback = {
+    /*const feedbacks = {
         campsiteId: campsiteId,
         rating: rating,
         author: author,
@@ -217,7 +222,7 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
 
     return fetch(baseUrl + 'feedback', {
             method: "POST",
-            body: JSON.stringify(feedback),
+            body: JSON.stringify(feedbacks),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -233,8 +238,8 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
             },
             error => { throw error; }
         )
-        //.then(response => response.json())
-        //.then(response => dispatch(response))
+        .then(response => response.json())
+        .then(response => dispatch(addFeedback(response)))
         .catch(error => {
             console.log('post feedback', error.message);
             alert('Your feedback could not be posted\nError: ' + error.message);
