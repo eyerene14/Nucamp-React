@@ -49,7 +49,6 @@ export const addCampsites = campsites => ({
 });
 
 
-
 export const fetchComments = () => dispatch => {    
     return fetch(baseUrl + 'comments')
     .then(response => {
@@ -158,9 +157,6 @@ export const addPromotions = promotions => ({
     payload: promotions
 });
 
-
-
-
 export const fetchPartners = () => dispatch => {
     dispatch(partnersLoading());
 
@@ -197,3 +193,38 @@ export const addPartners = partners => ({
     type: ActionTypes.ADD_PARTNERS,
     payload: partners
 });
+
+export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
+    
+    const feedback = {
+        campsiteId: campsiteId,
+        rating: rating,
+        author: author,
+        text: text
+    };
+    feedback.date = new Date().toISOString();
+
+    return fetch(baseUrl + 'feedback', {
+            method: "POST",
+            body: JSON.stringify(feedback),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+                if (response.ok) {
+                    return alert("Thank you for your feedback" + response);
+                } else {
+                    const error = new Error(`Error ${response.status}: ${response.statusText}`);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => { throw error; }
+        )
+        .then(response => response.json())
+        .catch(error => {
+            console.log('post feedback', error.message);
+            alert('Your feedback could not be posted\nError: ' + error.message);
+        });
+};
