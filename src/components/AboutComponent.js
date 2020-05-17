@@ -2,6 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderPartner({ partner }) {
     if (partner) {
@@ -28,32 +29,39 @@ function RenderPartner({ partner }) {
 function PartnerList(props) {
     const partners = props.partners.partners.map(partner => {
         return (
-            <Media tag="li" key={partner.id}>
-                <RenderPartner partner={partner} />
-            </Media>
-            /*} <h5>{partner.name}</h5>*/
+            <FadeTransform
+                in key={partner.id}
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                <Media tag="li">
+                    <RenderPartner partner={partner} />
+                </Media>
+            </FadeTransform>
         );
     });
 
-        if (props.partners.isLoading) {
-            return (
-                <Loading />
-            );
-        }
-        if (props.partners.errMess) {
-            return (
-                <h4>{props.partners.errMess}</h4>
-            );
-        }
+    if (props.partners.isLoading) {
         return (
+            <Loading />
+        );
+    }
+    if (props.partners.errMess) {
+        return (
+            <h4>{props.partners.errMess}</h4>
+        );
+    }
+    return (
+        <div className="col mt-4">
             <div className="col mt-4">
-                <div className="col mt-4">
+                <Stagger in>
                     <Media list>
                         {partners}
                     </Media>
-                </div>
+                </Stagger>
             </div>
-        )
+        </div>
+    )
 }
 
 function About(props) {
@@ -111,7 +119,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>Community Partners</h3>
                 </div>
-                <PartnerList partners={props.partners}/>
+                <PartnerList partners={props.partners} />
             </div>
         </div>
     );
