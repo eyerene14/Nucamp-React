@@ -39,7 +39,7 @@ class Contact extends Component {
     handleSubmit(values) {
         //alert('Current State is: ' + JSON.stringify(values));
         this.props.resetFeedbackForm();
-        this.props.postFeedback(values);
+        this.props.postFeedback(values.firstName, values.lastName, values.phoneNum, values.email, values.agree, values.contactType, values.comment);
     }
 
     render() {

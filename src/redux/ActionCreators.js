@@ -194,12 +194,8 @@ export const addPartners = partners => ({
     payload: partners
 });
 
-export const addFeedback = feedback => ({
-    type: ActionTypes.ADD_FEEDBACK,
-    payload: feedback
-});
 
-export const postFeedback = (firstName, lastName, phoneNum, email, agree, contactType, feedback) => dispatch => {
+export const postFeedback = (firstName, lastName, phoneNum, email, agree, contactType, comment) => dispatch => {
 //export const postFeedback = (campsiteId, rating, author, text) => dispatch => {
     
     /*const feedbacks = {
@@ -209,27 +205,27 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
         text: text
     };*/
 
-    const feedbacks = {
+    const feedback = {
         firstName: firstName,
         lastName: lastName,
         phoneNum: phoneNum,
         email: email,
         agree: agree,
         contactType: contactType,
-        feedback: feedback
+        feedback: comment
     };
-    feedbacks.date = new Date().toISOString();
+    feedback.date = new Date().toISOString();
 
     return fetch(baseUrl + 'feedback', {
             method: "POST",
-            body: JSON.stringify(feedbacks),
+            body: JSON.stringify(feedback),
             headers: {
                 "Content-Type": "application/json"
             }
         })
         .then(response => {
                 if (response.ok) {
-                    return alert("Thank you for your feedback" + JSON.stringify(feedbacks));
+                    return alert("Thank you for your feedback" + JSON.stringify(feedback));
                 } else {
                     const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
@@ -238,8 +234,6 @@ export const postFeedback = (firstName, lastName, phoneNum, email, agree, contac
             },
             error => { throw error; }
         )
-        .then(response => response.json())
-        .then(response => dispatch(addFeedback(response)))
         .catch(error => {
             console.log('post feedback', error.message);
             alert('Your feedback could not be posted\nError: ' + error.message);
